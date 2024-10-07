@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv4x87o14tbtm"]
+
+[ext_resource type="PackedScene" uid="uid://b2vil3laqq4c0" path="res://src/scene_transition/scene_transition_manager.tscn" id="1_73juh"]
+[ext_resource type="PackedScene" uid="uid://d1dxpq6javuki" path="res://src/scene_transition/scene_transition.tscn" id="4_3m1wf"]
+[ext_resource type="PackedScene" uid="uid://ci7b5uw811i6r" path="res://src/wireframe_cube/wireframe_cube.tscn" id="4_u2hu2"]
+[ext_resource type="PackedScene" uid="uid://b10tce8b30yo1" path="res://src/mushroom/zoom_mushroom_spawner.tscn" id="5_f5ink"]
+[ext_resource type="PackedScene" uid="uid://bvwvwsuo8dfl7" path="res://src/camera_sway/camera_sway.tscn" id="5_q1k7q"]
+
+[node name="Stt0" type="Node3D"]
+
+[node name="SceneTransition" parent="." instance=ExtResource("4_3m1wf")]
+metadata/transition_timer = 0.0
+metadata/start_scene_initial_scale = 0.0
+metadata/start_scene_target_scale = 3.0
+metadata/end_scene_target_scale = 0.0
+
+[node name="CameraSway" parent="SceneTransition" instance=ExtResource("5_q1k7q")]
+
+[node name="SceneTransitionManager" parent="." node_paths=PackedStringArray("scene_transition") instance=ExtResource("1_73juh")]
+scene_list = Array[Resource]([ExtResource("4_u2hu2"), ExtResource("5_f5ink")])
+scene_transition = NodePath("../SceneTransition")

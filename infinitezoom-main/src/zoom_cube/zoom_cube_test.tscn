@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bceeoxitw376w"]
+
+[ext_resource type="PackedScene" uid="uid://cr0j7yeqmde3y" path="res://src/player/player_container.tscn" id="1_5hcmx"]
+[ext_resource type="PackedScene" uid="uid://cjjjgfhc2fd8s" path="res://src/zoom_cube/zoom_cube_spawner.tscn" id="2_qo67w"]
+
+[node name="Main" type="Node3D"]
+
+[node name="PlayerContainer" parent="." instance=ExtResource("1_5hcmx")]
+
+[node name="ZoomCubeSpawner" parent="." instance=ExtResource("2_qo67w")]
+metadata/spawnCooldown = 0.05
+metadata/rotationSpeed = 0.5
+metadata/maxPosition = 16.0
+metadata/speed = 12.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)

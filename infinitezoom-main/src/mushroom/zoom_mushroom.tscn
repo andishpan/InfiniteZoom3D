@@ -1,0 +1,32 @@
+[gd_scene load_steps=9 format=3 uid="uid://du2sud6p71gey"]
+
+[ext_resource type="Texture2D" uid="uid://cew7ngbdteggq" path="res://assets/textures/standard_surface1_base_color.png" id="1_k6yvh"]
+[ext_resource type="Script" path="res://src/zoom_cube/zoom_cube.cs" id="2_7me3i"]
+[ext_resource type="ArrayMesh" uid="uid://cqp3i1yk50d7i" path="res://assets/obj_models/mushr1.obj" id="2_srac3"]
+[ext_resource type="ArrayMesh" uid="uid://li53g4m2ygeo" path="res://assets/obj_models/mushr2.obj" id="4_ov73y"]
+[ext_resource type="ArrayMesh" uid="uid://cs3pjrgie814i" path="res://assets/obj_models/mushr3.obj" id="5_ru65a"]
+[ext_resource type="ArrayMesh" uid="uid://ducdiyaiokd1g" path="res://assets/obj_models/mushr4.obj" id="6_htc5b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dflh3"]
+albedo_texture = ExtResource("1_k6yvh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yu4w0"]
+size = Vector3(3, 3, 4)
+
+[node name="ZoomMushroom" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_dflh3")
+mesh = ExtResource("2_srac3")
+script = ExtResource("2_7me3i")
+mesh_list = Array[Mesh]([ExtResource("2_srac3"), ExtResource("4_ov73y"), ExtResource("5_ru65a"), ExtResource("6_htc5b")])
+metadata/minMovement = 0.05
+metadata/maxMovement = 2.0
+metadata/minPosition = 0.05
+metadata/maxPosition = 4.0
+metadata/speed = 4.0
+metadata/rotationSpeed = 2.0
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.451111, 0.304151, -0.133911)
+shape = SubResource("BoxShape3D_yu4w0")

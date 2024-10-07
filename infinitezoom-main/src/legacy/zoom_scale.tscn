@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpoa0mti1bcem"]
+
+[ext_resource type="Texture2D" uid="uid://v823m50oqwfc" path="res://assets/textures/painted_concrete_diff_4k.jpg" id="2_h4hw6"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_3uorj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpio3"]
+albedo_color = Color(1, 0.435294, 0.0862745, 1)
+albedo_texture = SubResource("ImageTexture_3uorj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_5cd87"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlnbr"]
+albedo_texture = ExtResource("2_h4hw6")
+
+[sub_resource type="PrismMesh" id="PrismMesh_5xnjc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_fb7bk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51dao"]
+albedo_color = Color(1, 0.203922, 0.741176, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_djuky"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22345, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.1863)
+material_overlay = SubResource("StandardMaterial3D_bpio3")
+mesh = SubResource("BoxMesh_5cd87")
+
+[node name="Prism" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.04811)
+material_overlay = SubResource("StandardMaterial3D_dlnbr")
+mesh = SubResource("PrismMesh_5xnjc")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03439, 1.76808, 1.34909)
+mesh = SubResource("SphereMesh_fb7bk")
+
+[node name="Sphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67045, 0, -28.8891)
+mesh = SubResource("SphereMesh_fb7bk")
+
+[node name="Capsule" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85361, 0.000462532, -19.5428)
+material_overlay = SubResource("StandardMaterial3D_51dao")
+mesh = SubResource("CapsuleMesh_djuky")

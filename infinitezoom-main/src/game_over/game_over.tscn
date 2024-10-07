@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxnjqgwrphx3q"]
+
+[ext_resource type="FontFile" uid="uid://cvd6dth53bnf0" path="res://assets/fonts/SpaceMono-Bold.ttf" id="2_2mdlo"]
+[ext_resource type="Script" path="res://src/game_over/game_over.gd" id="2_psr7a"]
+[ext_resource type="PackedScene" uid="uid://beajooxwe2l1q" path="res://src/fade_transition/fade_transition.tscn" id="3_nr7b2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l30mb"]
+bg_color = Color(0.244769, 0.529599, 0.309643, 1)
+border_width_bottom = 2
+border_color = Color(0.243137, 0.529412, 0.309804, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2nca"]
+bg_color = Color(0.212718, 0.446065, 0.69116, 1)
+border_width_bottom = 2
+border_color = Color(0.114802, 0.281292, 0.451401, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+shadow_color = Color(0.00412023, 0.00350519, 0.00198317, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qqfgx"]
+
+[sub_resource type="Theme" id="Theme_rf8h3"]
+default_font = ExtResource("2_2mdlo")
+default_font_size = 30
+Button/styles/hover = SubResource("StyleBoxFlat_l30mb")
+Button/styles/normal = SubResource("StyleBoxFlat_u2nca")
+Label/styles/normal = SubResource("StyleBoxEmpty_qqfgx")
+
+[sub_resource type="LabelSettings" id="LabelSettings_j4yeq"]
+font = ExtResource("2_2mdlo")
+font_size = 100
+font_color = Color(0.913725, 1, 1, 1)
+shadow_size = 5
+shadow_color = Color(0.101961, 0.0901961, 0.447059, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5jriq"]
+font_size = 50
+
+[sub_resource type="Theme" id="Theme_ttrpn"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rf8h3")
+script = ExtResource("2_psr7a")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 136.0
+offset_right = 901.0
+offset_bottom = 273.0
+text = "Zoom Over
+"
+label_settings = SubResource("LabelSettings_j4yeq")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 276.0
+offset_right = 509.0
+offset_bottom = 336.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_5jriq")
+
+[node name="ScoreValue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 553.0
+offset_top = 278.0
+offset_right = 739.0
+offset_bottom = 353.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_5jriq")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 375.0
+offset_right = 760.0
+offset_bottom = 442.0
+theme = SubResource("Theme_ttrpn")
+text = "Back to Main Menu"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="FadeTransition" parent="." instance=ExtResource("3_nr7b2")]
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fade_timer" type="Timer" parent="FadeTransition"]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="FadeTransition/fade_timer" to="Button" method="_on_fade_timer_timeout"]

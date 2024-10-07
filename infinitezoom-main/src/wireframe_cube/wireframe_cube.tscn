@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://ci7b5uw811i6r"]
+
+[ext_resource type="Script" path="res://src/wireframe_cube/wireframe_cube.gd" id="1_td5pm"]
+[ext_resource type="Script" path="res://src/wireframe_cube/zoom_wireframe_spawner.cs" id="2_h2y6x"]
+[ext_resource type="PackedScene" uid="uid://cfs3jc8myqru2" path="res://src/wireframe_cube/wireframe_cube_spawn.tscn" id="3_lseaa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qiciy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iesnm"]
+shading_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ovs8"]
+
+[sub_resource type="Environment" id="Environment_otf6j"]
+background_mode = 2
+ambient_light_color = Color(0.688887, 0.945513, 0.823195, 1)
+glow_enabled = true
+
+[node name="WireframeCube" type="Node3D"]
+script = ExtResource("1_td5pm")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="CubeContainer" type="Node3D" parent="."]
+transform = Transform3D(0.997243, 0, 0, 0, 0.997243, 0, 0, 0, 0.997243, 0, 0, 0)
+script = ExtResource("2_h2y6x")
+metadata/spawnCooldown = 0.1
+metadata/spawnCount = 30
+metadata/rotationSpeed = 0.5
+metadata/minMovement = 0.1
+metadata/maxMovement = 2.0
+metadata/minPosition = 0.1
+metadata/maxPosition = 8.0
+metadata/speed = 2.0
+metadata/zoomCube = ExtResource("3_lseaa")
+
+[node name="Cube" type="MeshInstance3D" parent="CubeContainer"]
+visible = false
+mesh = SubResource("BoxMesh_qiciy")
+surface_material_override/0 = SubResource("StandardMaterial3D_iesnm")
+
+[node name="Node3D" type="Node3D" parent="CubeContainer/Cube"]
+
+[node name="Portal" type="MeshInstance3D" parent="CubeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3926, 5.84082, -1.64585)
+visible = false
+mesh = SubResource("SphereMesh_7ovs8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999598, -0.0108892, 0.0261648, 0.0112285, 0.69551, 0.718429, -0.026021, 0.718434, -0.695108, 0, 2.62777, 2.31037)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999598, -0.0108892, 0.0261648, 0.0112285, 0.69551, 0.718429, -0.026021, 0.718434, -0.695108, 0, 2.62777, 1.79993)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.55222, 0.594661, -0.584321, 0.0112285, 0.69551, 0.718429, 0.833623, -0.403292, 0.377397, -5.23006, 1.13748, 5.48165)
+
+[node name="DirectionalLight3D5" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.60957, -0.574298, 0.54645, 0.0112285, 0.69551, 0.718429, -0.792653, -0.431796, 0.43041, 3.01108, 1.13748, 5.48165)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999598, -0.0108892, 0.0261648, -0.0283125, 0.424614, -0.904932, -0.00125595, -0.905309, -0.424752, 0, -4.69819, 2.31037)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_otf6j")

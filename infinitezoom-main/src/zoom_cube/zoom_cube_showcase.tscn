@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bopsxsdmq4hob"]
+
+[ext_resource type="PackedScene" uid="uid://cjjjgfhc2fd8s" path="res://src/zoom_cube/zoom_cube_spawner.tscn" id="1_wx5gr"]
+
+[sub_resource type="Environment" id="Environment_7f54r"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="ZoomCubeShowcase" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7f54r")
+
+[node name="ZoomCubeSpawner" parent="." instance=ExtResource("1_wx5gr")]
+metadata/spawnCount = 7
+metadata/rotationSpeed = 0.5
+metadata/minMovement = 0.0
+metadata/maxMovement = 0.33
+metadata/maxPosition = 16.0
+metadata/speed = 10.0
+metadata/cubeRotationSpeed = 0.1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)

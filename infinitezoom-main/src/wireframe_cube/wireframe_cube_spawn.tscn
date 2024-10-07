@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfs3jc8myqru2"]
+
+[ext_resource type="Shader" path="res://assets/shaders/zoom_sphere.gdshader" id="1_uc4qr"]
+[ext_resource type="Script" path="res://src/wireframe_cube/wireframe_zoom_cube.cs" id="2_gyc6t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntph8"]
+render_priority = 0
+shader = ExtResource("1_uc4qr")
+
+[sub_resource type="BoxMesh" id="BoxMesh_laork"]
+
+[node name="wireframeCubeSpawn" type="MeshInstance3D"]
+transform = Transform3D(10033.1, 0, 0, 0, -316.702, 0, 0, 0, -23491.8, 0, 0, -10)
+material_override = SubResource("ShaderMaterial_ntph8")
+mesh = SubResource("BoxMesh_laork")
+script = ExtResource("2_gyc6t")

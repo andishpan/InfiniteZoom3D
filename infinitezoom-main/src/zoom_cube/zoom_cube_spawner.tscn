@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjjjgfhc2fd8s"]
+
+[ext_resource type="Script" path="res://src/zoom_cube/zoom_cube_spawner.cs" id="1_5qbry"]
+[ext_resource type="PackedScene" uid="uid://dq12ku567mn1q" path="res://src/zoom_cube/zoom_cube.tscn" id="2_agkb3"]
+
+[sub_resource type="Environment" id="Environment_mw18i"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="ZoomCubeSpawner" type="Node3D"]
+script = ExtResource("1_5qbry")
+metadata/spawnCooldown = 0.1
+metadata/zoomCube = ExtResource("2_agkb3")
+metadata/spawnCount = 10
+metadata/rotationSpeed = 0.0
+metadata/minMovement = 0.1
+metadata/maxMovement = 2.0
+metadata/minPosition = 0.1
+metadata/maxPosition = 8.0
+metadata/speed = 2.0
+metadata/cubeRotationSpeed = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mw18i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)

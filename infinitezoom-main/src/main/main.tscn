@@ -1,0 +1,38 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6avtbrm8y31f"]
+
+[ext_resource type="PackedScene" uid="uid://d1dxpq6javuki" path="res://src/scene_transition/scene_transition.tscn" id="1_7wtsf"]
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_sxcw7"]
+[ext_resource type="PackedScene" uid="uid://bvwvwsuo8dfl7" path="res://src/camera_sway/camera_sway.tscn" id="2_x1s6c"]
+[ext_resource type="PackedScene" uid="uid://b2vil3laqq4c0" path="res://src/scene_transition/scene_transition_manager.tscn" id="4_jvmdn"]
+[ext_resource type="PackedScene" uid="uid://bopsxsdmq4hob" path="res://src/zoom_cube/zoom_cube_showcase.tscn" id="5_7qr6j"]
+[ext_resource type="PackedScene" uid="uid://mjrvwlmx5tcb" path="res://src/tunnel/tunnel_colorful.tscn" id="7_oe1h4"]
+[ext_resource type="PackedScene" uid="uid://baui1gv2vi84v" path="res://src/microbe_scene/microbe_scene.tscn" id="8_b10mo"]
+[ext_resource type="PackedScene" uid="uid://ci7b5uw811i6r" path="res://src/wireframe_cube/wireframe_cube.tscn" id="9_8boy6"]
+[ext_resource type="PackedScene" uid="uid://dslsn4k7g1ah6" path="res://src/mandelbrot/mandelbrot_scene.tscn" id="10_5p10c"]
+[ext_resource type="PackedScene" uid="uid://b10tce8b30yo1" path="res://src/mushroom/zoom_mushroom_spawner.tscn" id="10_mmivn"]
+[ext_resource type="PackedScene" uid="uid://beajooxwe2l1q" path="res://src/fade_transition/fade_transition.tscn" id="11_86h2w"]
+[ext_resource type="PackedScene" uid="uid://det7g41aieuni" path="res://src/main_menu/menu.tscn" id="12_5koid"]
+[ext_resource type="PackedScene" uid="uid://bxnjqgwrphx3q" path="res://src/game_over/game_over.tscn" id="13_f7hoi"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_sxcw7")
+
+[node name="SceneTransition" parent="." instance=ExtResource("1_7wtsf")]
+metadata/transition_timer = 0.0
+metadata/start_scene_initial_scale = 0.0
+metadata/start_scene_target_scale = 3.0
+metadata/end_scene_target_scale = 0.0
+
+[node name="CameraSway" parent="SceneTransition" instance=ExtResource("2_x1s6c")]
+visible = false
+
+[node name="SceneTransitionManager" parent="." node_paths=PackedStringArray("scene_transition") instance=ExtResource("4_jvmdn")]
+scene_list = Array[Resource]([ExtResource("5_7qr6j"), ExtResource("7_oe1h4"), ExtResource("8_b10mo"), ExtResource("9_8boy6"), ExtResource("10_5p10c"), ExtResource("10_mmivn")])
+scene_transition = NodePath("../SceneTransition")
+
+[node name="FadeTransition" parent="." instance=ExtResource("11_86h2w")]
+
+[node name="Menu" parent="." instance=ExtResource("12_5koid")]
+
+[node name="GameOver" parent="." instance=ExtResource("13_f7hoi")]
+visible = false

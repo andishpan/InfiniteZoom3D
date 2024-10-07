@@ -1,0 +1,152 @@
+[gd_scene load_steps=17 format=3 uid="uid://dslsn4k7g1ah6"]
+
+[ext_resource type="Script" path="res://src/mandelbrot/FractalZoom.cs" id="1_ngbsr"]
+[ext_resource type="Shader" path="res://assets/shaders/fractal_shader.gdshader" id="2_s25g6"]
+[ext_resource type="ArrayMesh" uid="uid://b3bokqajannoo" path="res://assets/obj_models/crystal big.obj" id="4_wnkjp"]
+[ext_resource type="QuadMesh" uid="uid://b3gfynd3qs0mf" path="res://assets/materials/smoke_particles.tres" id="6_41k37"]
+[ext_resource type="ArrayMesh" uid="uid://cmqboudwcwhod" path="res://assets/obj_models/crystal.obj" id="6_gies6"]
+
+[sub_resource type="Environment" id="Environment_cuq0b"]
+background_mode = 1
+background_color = Color(0.572988, 0.572988, 0.572988, 1)
+background_energy_multiplier = 3.0
+adjustment_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6kbjb"]
+render_priority = 0
+shader = ExtResource("2_s25g6")
+shader_parameter/zoom = 1.0
+shader_parameter/center = Vector3(0, 0, 0)
+shader_parameter/base_color = Vector3(1, 1, 1)
+shader_parameter/max_iter = 50
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u8v61"]
+material = SubResource("ShaderMaterial_6kbjb")
+flip_faces = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqqpu"]
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.215914, 0.114197, 0.446322, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1mkph"]
+height = 57.4874
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jihm5"]
+height = 56.8571
+
+[sub_resource type="SphereMesh" id="SphereMesh_f5omn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_827wk"]
+transparency = 1
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.460738, 0.000296534, 0.506509, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vp58n"]
+angle_max = 360.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 4.9
+initial_velocity_max = 5.1
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k556p"]
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.468556, 0.00109767, 0.629325, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3dvn4"]
+radius = 0.374972
+height = 1.50195
+
+[node name="Spatial" type="Node3D"]
+script = ExtResource("1_ngbsr")
+color = Color(0.38438, 0.570019, 0.521323, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 93.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cuq0b")
+
+[node name="FractalTunnel" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, -2.18557e-06, -50, 0, 50, -2.18557e-06, 0, 0, 0)
+mesh = SubResource("CylinderMesh_u8v61")
+
+[node name="Obstacle1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 40, -40, -50)
+mesh = ExtResource("4_wnkjp")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqqpu")
+
+[node name="Area3D" type="Area3D" parent="Obstacle1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle1/Area3D"]
+shape = SubResource("CapsuleShape3D_1mkph")
+
+[node name="Obstacle2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -40, -40, -50)
+mesh = ExtResource("4_wnkjp")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqqpu")
+
+[node name="Area3D" type="Area3D" parent="Obstacle2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle2/Area3D"]
+shape = SubResource("CapsuleShape3D_jihm5")
+
+[node name="ContainerLeft" type="Node3D" parent="."]
+
+[node name="ContainerRight" type="Node3D" parent="."]
+
+[node name="CrystalContainer" type="Node3D" parent="."]
+
+[node name="Mirror" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.21265)
+visible = false
+mesh = SubResource("SphereMesh_f5omn")
+skeleton = NodePath("../ReflectionProbe")
+surface_material_override/0 = SubResource("StandardMaterial3D_827wk")
+
+[node name="SmokeLeft" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.999994, -0.00272776, 0.00200442, 0.00272792, 0.999996, -7.57278e-05, -0.0020042, 8.11952e-05, 0.999998, -18.349, -16.489, -38.4637)
+emitting = false
+amount = 10000
+lifetime = 2.0
+speed_scale = 2.0
+randomness = 1.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_vp58n")
+draw_pass_1 = ExtResource("6_41k37")
+
+[node name="SmokeRight" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.999994, -0.00272776, 0.00200442, 0.00272792, 0.999996, -7.57278e-05, -0.0020042, 8.11952e-05, 0.999998, 18.3493, -16.4886, -38.464)
+emitting = false
+amount = 10000
+lifetime = 2.0
+speed_scale = 2.0
+randomness = 1.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_vp58n")
+draw_pass_1 = ExtResource("6_41k37")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.56628, 1.63095, 3.07629)
+update_mode = 1
+size = Vector3(65.1458, 50.2821, 113.647)
+
+[node name="Crystal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -57.333)
+mesh = ExtResource("6_gies6")
+surface_material_override/0 = SubResource("StandardMaterial3D_k556p")
+
+[node name="Area3D" type="Area3D" parent="Crystal"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crystal/Area3D"]
+shape = SubResource("CapsuleShape3D_3dvn4")

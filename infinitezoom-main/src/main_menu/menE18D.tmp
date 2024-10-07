@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://det7g41aieuni"]
+
+[ext_resource type="FontFile" uid="uid://cvd6dth53bnf0" path="res://assets/fonts/SpaceMono-Bold.ttf" id="1_aeeaf"]
+[ext_resource type="Script" path="res://src/main_menu/Menu.gd" id="1_rn1df"]
+[ext_resource type="VideoStream" path="res://assets/videos/mushroom_video.ogv" id="2_gbc6j"]
+[ext_resource type="PackedScene" uid="uid://beajooxwe2l1q" path="res://src/fade_transition/fade_transition.tscn" id="4_gae6r"]
+[ext_resource type="Script" path="res://src/main_menu/highscore_label.gd" id="5_0mjn4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1um2"]
+bg_color = Color(0.244769, 0.529599, 0.309643, 1)
+border_width_bottom = 2
+border_color = Color(0.243137, 0.529412, 0.309804, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbcyb"]
+bg_color = Color(0.212718, 0.446065, 0.69116, 1)
+border_width_bottom = 2
+border_color = Color(0.114802, 0.281292, 0.451401, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+shadow_color = Color(0.00412023, 0.00350519, 0.00198317, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Theme" id="Theme_mvojc"]
+default_font = ExtResource("1_aeeaf")
+default_font_size = 30
+Button/styles/hover = SubResource("StyleBoxFlat_o1um2")
+Button/styles/normal = SubResource("StyleBoxFlat_mbcyb")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mvojc")
+script = ExtResource("1_rn1df")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_gbc6j")
+autoplay = true
+expand = true
+loop = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Zoom"
+
+[node name="Relax" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Relax Mode"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="FadeTransition" parent="." instance=ExtResource("4_gae6r")]
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fade_timer" type="Timer" parent="FadeTransition"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -150.0
+offset_top = 0.399994
+offset_right = 150.0
+text = "Highscore:"
+horizontal_alignment = 1
+script = ExtResource("5_0mjn4")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Relax" to="." method="_on_settings_pressed"]
+[connection signal="timeout" from="FadeTransition/fade_timer" to="." method="_on_fade_timer_timeout"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://beajooxwe2l1q"]
+
+[sub_resource type="Animation" id="Animation_yvu74"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0431373, 0.0431373, 0.0431373, 0.0156863), Color(0.0431373, 0.0431373, 0.0431373, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_estme"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0431373, 0.0431373, 0.0431373, 1), Color(0.0431373, 0.0431373, 0.0431373, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_06dls"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0431373, 0.0431373, 0.0431373, 0.0156863)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpyk3"]
+_data = {
+"RESET": SubResource("Animation_06dls"),
+"fade_in": SubResource("Animation_yvu74"),
+"fade_out": SubResource("Animation_estme")
+}
+
+[node name="FadeTransition" type="ColorRect"]
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 42.0
+offset_bottom = 38.0
+scale = Vector2(28.8968, 16.4172)
+color = Color(0.0431373, 0.0431373, 0.0431373, 0.0156863)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cpyk3")
+}

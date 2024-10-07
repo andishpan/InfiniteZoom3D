@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmja6m430cwbu"]
+
+[ext_resource type="Script" path="res://src/camera_sway/camera_sway.cs" id="1_aulkw"]
+[ext_resource type="PackedScene" uid="uid://cr0j7yeqmde3y" path="res://src/player/player_container.tscn" id="2_he6e7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyvps"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1qndk"]
+material = SubResource("StandardMaterial3D_hyvps")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a204y"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4rla1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_biktv"]
+
+[node name="CameraSway" type="Node3D" node_paths=PackedStringArray("container")]
+script = ExtResource("1_aulkw")
+container = NodePath("ObstacleContainer")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(35.1971, 0, 0, 0, 0.54098, 0, 0, 0, 386.07, 0, 18.6168, 0)
+mesh = SubResource("BoxMesh_1qndk")
+surface_material_override/0 = SubResource("StandardMaterial3D_a204y")
+
+[node name="ObstacleContainer" type="Node3D" parent="."]
+
+[node name="ExampleObstacle" type="MeshInstance3D" parent="ObstacleContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330615, 0, -16.8848)
+mesh = SubResource("BoxMesh_4rla1")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="ObstacleContainer/ExampleObstacle"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObstacleContainer/ExampleObstacle/Area3D"]
+shape = SubResource("BoxShape3D_biktv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(35.1971, 0, 0, 0, 0.54098, 0, 0, 0, 386.07, 0, -18.6428, 0)
+mesh = SubResource("BoxMesh_1qndk")
+
+[node name="PlayerContainer" parent="." instance=ExtResource("2_he6e7")]

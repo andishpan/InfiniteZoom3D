@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxws7qflicrnr"]
+
+[ext_resource type="Script" path="res://src/legacy/scene_transition_prototype.cs" id="1_a2ec8"]
+[ext_resource type="PackedScene" uid="uid://mjrvwlmx5tcb" path="res://src/tunnel/tunnel_colorful.tscn" id="2_fjpmi"]
+[ext_resource type="PackedScene" uid="uid://cr0j7yeqmde3y" path="res://src/player/player_container.tscn" id="2_lf515"]
+[ext_resource type="PackedScene" uid="uid://cjjjgfhc2fd8s" path="res://src/zoom_cube/zoom_cube_spawner.tscn" id="2_v5kds"]
+
+[node name="SceneTransitionTest" type="Node3D"]
+script = ExtResource("1_a2ec8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+
+[node name="PlayerContainer" parent="." instance=ExtResource("2_lf515")]
+
+[node name="ZoomCubeSpawner" parent="." instance=ExtResource("2_v5kds")]
+metadata/spawnCount = 20
+metadata/rotationSpeed = 0.5
+metadata/speed = 6.0
+
+[node name="Tunnel" parent="." instance=ExtResource("2_fjpmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)

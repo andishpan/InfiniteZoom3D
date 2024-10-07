@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://beksqh16fn324"]
+
+[ext_resource type="Script" path="res://src/procedural/terrain_segment.cs" id="1_7ao6i"]
+
+[node name="TerrainSegment" type="Node3D"]
+script = ExtResource("1_7ao6i")
+samples = 12

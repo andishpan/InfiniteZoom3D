@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://li53g4m2ygeo"
+path="res://.godot/imported/mushr2.obj-6302a067f304c4f8674e536d841313ad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mushr2.obj-6302a067f304c4f8674e536d841313ad.mesh"]
+
+source_file="res://assets/obj_models/mushr2.obj"
+dest_files=["res://.godot/imported/mushr2.obj-6302a067f304c4f8674e536d841313ad.mesh", "res://.godot/imported/mushr2.obj-6302a067f304c4f8674e536d841313ad.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

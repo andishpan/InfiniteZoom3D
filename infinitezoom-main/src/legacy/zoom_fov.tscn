@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp6nl6as58ext"]
+
+[ext_resource type="Script" path="res://src/legacy/infinite_zoom_fov.cs" id="1_lvl21"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_383m3"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_s5e1l"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_826dc"]
+
+[node name="ZoomFOV" type="Node3D"]
+script = ExtResource("1_lvl21")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.1183)
+mesh = SubResource("BoxMesh_383m3")
+
+[node name="Prism" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.117271, 0, 0, 0, 0.117271, 0, 0, 0, 0.117271, 0, 0, -5.2994)
+mesh = SubResource("PrismMesh_s5e1l")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.44153, 0, 0, 0, -1.06723e-07, -2.44153, 0, 2.44153, -1.06723e-07, 0, 0, -8.73031)
+mesh = SubResource("CylinderMesh_826dc")
+
+[node name="Camera" type="Camera3D" parent="."]

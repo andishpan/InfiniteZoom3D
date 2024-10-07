@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvwvwsuo8dfl7"]
+
+[ext_resource type="Script" path="res://src/camera_sway/camera_sway.cs" id="1_4vdvm"]
+[ext_resource type="PackedScene" uid="uid://cr0j7yeqmde3y" path="res://src/player/player_container.tscn" id="2_ul4aw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4rla1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_biktv"]
+
+[node name="CameraSway" type="Node3D"]
+script = ExtResource("1_4vdvm")
+
+[node name="PlayerContainer" parent="." instance=ExtResource("2_ul4aw")]
+
+[node name="ObstacleContainer" type="Node3D" parent="."]
+
+[node name="ExampleObstacle" type="MeshInstance3D" parent="ObstacleContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.331, 0, 16.885)
+visible = false
+mesh = SubResource("BoxMesh_4rla1")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="ObstacleContainer/ExampleObstacle"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObstacleContainer/ExampleObstacle/Area3D"]
+shape = SubResource("BoxShape3D_biktv")

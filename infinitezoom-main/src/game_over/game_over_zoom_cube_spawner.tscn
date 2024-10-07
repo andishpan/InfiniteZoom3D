@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxc23p0pa2soc"]
+
+[ext_resource type="Script" path="res://src/zoom_cube/zoom_cube_spawner.cs" id="1_2yhu7"]
+[ext_resource type="PackedScene" uid="uid://dq12ku567mn1q" path="res://src/zoom_cube/zoom_cube.tscn" id="2_40q21"]
+[ext_resource type="PackedScene" uid="uid://bxnjqgwrphx3q" path="res://src/game_over/game_over.tscn" id="3_k6d6a"]
+
+[sub_resource type="Environment" id="Environment_mw18i"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="GameOverZoomCubeSpawner" type="Node3D"]
+script = ExtResource("1_2yhu7")
+metadata/spawnCooldown = 0.1
+metadata/zoomCube = ExtResource("2_40q21")
+metadata/spawnCount = 10
+metadata/rotationSpeed = 0.0
+metadata/minMovement = 0.1
+metadata/maxMovement = 2.0
+metadata/minPosition = 0.1
+metadata/maxPosition = 8.0
+metadata/speed = 2.0
+metadata/cubeRotationSpeed = 0.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mw18i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="GameOver" parent="." instance=ExtResource("3_k6d6a")]

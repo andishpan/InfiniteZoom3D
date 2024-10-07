@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci7b5uw811i6r"]
+
+[ext_resource type="Script" path="res://src/wireframe_cube/wireframe_cube.gd" id="1_td5pm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_457nc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iesnm"]
+shading_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ovs8"]
+
+[node name="WireframeCube" type="Node3D"]
+script = ExtResource("1_td5pm")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333635, 0.22345, 7.79347)
+
+[node name="CubeContainer" type="Node3D" parent="."]
+
+[node name="Cube" type="MeshInstance3D" parent="CubeContainer"]
+mesh = SubResource("BoxMesh_457nc")
+surface_material_override/0 = SubResource("StandardMaterial3D_iesnm")
+
+[node name="Node3D" type="Node3D" parent="CubeContainer/Cube"]
+
+[node name="Portal" type="MeshInstance3D" parent="CubeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3926, 5.84082, -1.64585)
+mesh = SubResource("SphereMesh_7ovs8")

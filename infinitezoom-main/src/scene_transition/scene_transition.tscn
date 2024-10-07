@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1dxpq6javuki"]
+
+[ext_resource type="Script" path="res://src/scene_transition/scene_transition.cs" id="1_aop6o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_umhk3"]
+font_size = 43
+
+[node name="SceneTransition" type="Node3D"]
+script = ExtResource("1_aop6o")
+metadata/transition_timer = 10.0
+metadata/transition_duration = 2.0
+metadata/start_fov = 0.0
+metadata/end_fov = 0.0
+metadata/start_scene_camera_path = ""
+metadata/end_scene_camera_path = ""
+metadata/player_initial_scale = 1.0
+metadata/start_scene_initial_scale = 1.0
+metadata/end_scene_initial_scale = 0.01
+metadata/player_target_scale = 1.0
+metadata/start_scene_target_scale = 1.0
+metadata/end_scene_target_scale = 1.0
+metadata/player_initial_speed = 50.0
+metadata/player_initial_accel = 350.0
+metadata/player_initial_movement_bound = 8.0
+metadata/player_target_speed = 50.0
+metadata/player_target_accel = 350.0
+metadata/player_target_movement_bound = 8.0
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -27.5
+offset_right = 253.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Transitioning Scene"
+label_settings = SubResource("LabelSettings_umhk3")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

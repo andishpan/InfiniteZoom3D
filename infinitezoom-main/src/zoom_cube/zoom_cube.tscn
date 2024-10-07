@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq12ku567mn1q"]
+
+[ext_resource type="Shader" path="res://assets/shaders/zoom_cube.gdshader" id="1_h7ol4"]
+[ext_resource type="Script" path="res://src/zoom_cube/zoom_cube.cs" id="1_v1xfd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntph8"]
+render_priority = 0
+shader = ExtResource("1_h7ol4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6kx8j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8nr4m"]
+
+[node name="ZoomCube" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+material_override = SubResource("ShaderMaterial_ntph8")
+mesh = SubResource("BoxMesh_6kx8j")
+script = ExtResource("1_v1xfd")
+mesh_list = Array[Mesh]([])
+metadata/minMovement = 0.5
+metadata/maxMovement = 0.0
+metadata/minPosition = 0.1
+metadata/maxPosition = 16.0
+metadata/speed = 10.0
+metadata/rotationSpeed = 0.1
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_8nr4m")

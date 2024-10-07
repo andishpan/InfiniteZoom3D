@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2vil3laqq4c0"]
+
+[ext_resource type="Script" path="res://src/scene_transition/scene_transition_manager.cs" id="1_ihbxs"]
+
+[node name="SceneTransitionManager" type="Node3D"]
+script = ExtResource("1_ihbxs")
+scene_list = Array[Resource]([])

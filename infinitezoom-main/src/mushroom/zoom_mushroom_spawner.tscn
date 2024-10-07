@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b10tce8b30yo1"]
+
+[ext_resource type="PackedScene" uid="uid://cjjjgfhc2fd8s" path="res://src/zoom_cube/zoom_cube_spawner.tscn" id="1_enysy"]
+[ext_resource type="PackedScene" uid="uid://du2sud6p71gey" path="res://src/mushroom/zoom_mushroom.tscn" id="2_w7ors"]
+[ext_resource type="VideoStream" path="res://assets/videos/mushroom_video_60.ogv" id="3_5g2of"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5k03b"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="MushroomSpawner" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30.613, 8.74458)
+
+[node name="ZoomCubeSpawner" parent="." instance=ExtResource("1_enysy")]
+transform = Transform3D(1, 0, 0, 0, 1.4, 0, 0, 0, 1.8, 0, 0, 50)
+metadata/spawnCooldown = 0.25
+metadata/zoomCube = ExtResource("2_w7ors")
+metadata/spawnCount = 3
+metadata/minMovement = 0.05
+metadata/minPosition = 0.05
+metadata/maxPosition = 4.0
+metadata/speed = 4.0
+metadata/cubeRotationSpeed = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+texture = SubResource("ViewportTexture_5k03b")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Sprite3D/SubViewport"]
+anchors_preset = -1
+anchor_right = 1.011
+anchor_bottom = 0.986
+offset_right = 0.0310059
+offset_bottom = 8.19788
+stream = ExtResource("3_5g2of")
+autoplay = true
+expand = true
+loop = true

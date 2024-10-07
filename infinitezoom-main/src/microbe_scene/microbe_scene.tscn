@@ -1,0 +1,150 @@
+[gd_scene load_steps=19 format=3 uid="uid://baui1gv2vi84v"]
+
+[ext_resource type="Script" path="res://src/microbe_scene/microbe_scene.cs" id="1_ktxh8"]
+[ext_resource type="ArrayMesh" uid="uid://bpml1g45m70kq" path="res://assets/obj_models/virus_high_res.obj" id="2_0ge7l"]
+[ext_resource type="Shader" path="res://assets/shaders/test_shader.gdshader" id="2_ky2ip"]
+[ext_resource type="Script" path="res://src/microbe_scene/ground.gd" id="3_oacym"]
+[ext_resource type="ArrayMesh" uid="uid://bm0myedr15310" path="res://assets/obj_models/phage.obj" id="3_xgxdh"]
+[ext_resource type="ArrayMesh" uid="uid://bc0dmxyx0bbm3" path="res://assets/obj_models/cell.obj" id="4_fyffx"]
+
+[sub_resource type="Environment" id="Environment_aauf7"]
+background_mode = 1
+background_color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xos8u"]
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ymqi7"]
+radius = 2.94536
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uh05w"]
+height = 5.43323
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0gtww"]
+height = 0.14457
+radius = 0.943603
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j4n51"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wdsen"]
+noise = SubResource("FastNoiseLite_j4n51")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jfi8p"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tmt6x"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_jfi8p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ko4v0"]
+render_priority = 0
+shader = ExtResource("2_ky2ip")
+shader_parameter/height_scale = 0.5
+shader_parameter/noise = SubResource("NoiseTexture2D_wdsen")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_tmt6x")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p3gan"]
+material = SubResource("ShaderMaterial_ko4v0")
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="BoxMesh" id="BoxMesh_6xa8p"]
+
+[node name="MicrobeScene" type="Node3D" node_paths=PackedStringArray("container", "groundContainer")]
+transform = Transform3D(0.683087, 0, 0, 0, 0.683087, 0, 0, 0, 0.683087, 0, 0, 0)
+script = ExtResource("1_ktxh8")
+container = NodePath("Container")
+groundContainer = NodePath("groundContainer")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.46394, 0, 0, 0, 1.46394, 0, 0, 0, 1.46394, 0, 0, 0)
+environment = SubResource("Environment_aauf7")
+
+[node name="Container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0104465, -0.0298567, -10.6367)
+
+[node name="Virus" type="MeshInstance3D" parent="Container"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -8.3352)
+visible = false
+mesh = ExtResource("2_0ge7l")
+surface_material_override/0 = SubResource("StandardMaterial3D_xos8u")
+
+[node name="Area3D" type="Area3D" parent="Container/Virus"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/Virus/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34022, 0, 0)
+visible = false
+shape = SubResource("SphereShape3D_ymqi7")
+
+[node name="Phage" type="MeshInstance3D" parent="Container"]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, -11.2338)
+visible = false
+mesh = ExtResource("3_xgxdh")
+surface_material_override/0 = SubResource("StandardMaterial3D_xos8u")
+
+[node name="Area3D" type="Area3D" parent="Container/Phage"]
+visible = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/Phage/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999985, 0, 0.297234, -0.0363159)
+shape = SubResource("CapsuleShape3D_uh05w")
+
+[node name="Cell" type="MeshInstance3D" parent="Container"]
+transform = Transform3D(1.93924, 0, 0, 0, 1.93924, 0, 0, 0, 1.93924, 0, 0, -10.1414)
+visible = false
+mesh = ExtResource("4_fyffx")
+surface_material_override/0 = SubResource("StandardMaterial3D_xos8u")
+
+[node name="Area3D" type="Area3D" parent="Container/Cell"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/Cell/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999985, 0, -0.0378105, -0.0219727)
+shape = SubResource("CylinderShape3D_0gtww")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1.46394, 0, 0, 0, 1.46394, 0, 0, 0, -1.46394, 0.549929, 3.33027, 1.56253)
+light_color = Color(0.975664, 4.57242e-06, 1.54018e-06, 1)
+light_energy = 9.242
+omni_range = 4096.0
+omni_attenuation = 0.965937
+
+[node name="groundContainer" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="groundContainer"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -40, -50)
+mesh = SubResource("PlaneMesh_p3gan")
+skeleton = NodePath("../..")
+script = ExtResource("3_oacym")
+
+[node name="Ceiling" type="MeshInstance3D" parent="groundContainer"]
+transform = Transform3D(-50, 4.37114e-06, 0, -4.37114e-06, -50, 0, 0, 0, 50, 0, 40, -50)
+mesh = SubResource("PlaneMesh_p3gan")
+skeleton = NodePath("../..")
+script = ExtResource("3_oacym")
+
+[node name="WallRight" type="MeshInstance3D" parent="groundContainer"]
+transform = Transform3D(-2.18557e-06, -50, 0, 50, -2.18557e-06, 0, 0, 0, 50, 50, 0, -50)
+mesh = SubResource("PlaneMesh_p3gan")
+skeleton = NodePath("../..")
+script = ExtResource("3_oacym")
+
+[node name="WallRight2" type="MeshInstance3D" parent="groundContainer"]
+transform = Transform3D(-2.18557e-06, 50, 0, -50, -2.18557e-06, 0, 0, 0, 50, -50, 0, -50)
+mesh = SubResource("PlaneMesh_p3gan")
+skeleton = NodePath("../..")
+script = ExtResource("3_oacym")
+
+[node name="BackPlate" type="MeshInstance3D" parent="."]
+transform = Transform3D(337.927, 0, 0, 0, 276.139, 0, 0, 0, 1, 0, 0, -450.779)
+visible = false
+mesh = SubResource("BoxMesh_6xa8p")
+
+[connection signal="area_entered" from="Container/Virus/Area3D" to="." method="OnEnter2"]
+[connection signal="area_entered" from="Container/Phage/Area3D" to="." method="OnEnter2"]
+[connection signal="area_entered" from="Container/Cell/Area3D" to="." method="OnEnter2"]
